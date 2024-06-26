@@ -1,0 +1,151 @@
+/* Names Sections */
+.nameApp {
+    grid-column: 1/4;
+    text-align: center;
+}
+
+.nameAllocation {
+    text-align: center;
+}
+
+.nameChangeAllocation {
+    grid-column: 1/5;
+    text-align: center;
+}
+/* ------------------------------------------------- */
+
+/* Section Header */
+
+.allComponentesHeader {
+    display: grid;
+    grid-template-columns: 25% 37.5% 37.5%;
+    background-color: rgba(116, 8, 205, 0.749);
+}
+
+.miBudget {
+    display: grid;
+    margin: 10px;
+    background-color: rgb(185, 201, 201);
+    align-items: end;
+    justify-items: center;
+    padding: 15px 0px 10px 0px;
+    border-radius: 10px;
+}
+
+.miRemaining {
+    display: grid;
+    margin: 10px;
+    padding: 15px 0px 15px 0px;
+    background-color: rgb(129, 214, 135);
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px;
+}
+
+.spentSoFar {
+    display: grid;
+    margin: 10px;
+    padding: 15px 0px 15px 0px;
+    background-color: rgb(108, 200, 200);
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px;
+}
+/* ---------------------------------------------- */
+
+.miAllocationTable {
+
+}
+
+/* Button Table */
+
+.buttonsIncDel {
+    border: none;
+    border-radius: 0% 60% 0% 60%;
+    background-color: rgb(255, 255, 255);
+}
+/* -------------------------------------------------- */
+
+/* Section Change allocation */
+
+.miChangeAllocation {
+    display: grid;
+    grid-template-columns: 30% 30% 20% 20%;
+    grid-column-gap: 10px;
+    /* padding: 10px 0px 0px 20px; */
+}
+
+.changeDepartment, .changeAllocation {
+    display: grid; 
+    margin: 10px 0px;
+    align-items: center;
+    justify-items: center;
+}
+
+.selectChangeDepartment, .selectChangeAllocation {
+    background-color: lightseagreen;
+    border-radius: 10px;
+    margin: 0px 10px;
+}
+
+.selectChangeDepartment:hover {
+    background-color: darkgrey;
+}
+
+.selectChangeAllocation:hover {
+    background-color: darkgrey;
+}
+
+.divInputChangeAllocation {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+}
+
+.inputChangeAllocation {
+    transform: translateY(12px);
+    border-radius: 6px;
+}
+
+.divButtonSave {
+    display: grid;
+    align-items: center;
+    justify-items: stretch;
+}
+
+.buttonSave {
+    margin-left: 10px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: lightpink;
+    transform: translateY(12px);
+}
+
+.buttonSave:hover{
+    background-color: aquamarine;
+}
+
+.alertCostInput, .alertCostInput1 {
+    width: 250px;
+    text-align: center;
+    background-color: rgb(247, 93, 93);
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    color: lightsteelblue;
+}
+
+input:invalid ~ .alertCostInput {
+    visibility: visible;
+    opacity: 1;
+}
+
+input:invalid ~ .alertCostInput1 {
+    width: 150px;
+    transform: translateY(55px);
+    visibility: visible;
+    opacity: 1;
+}
+/* ------------------------------------------------- */
