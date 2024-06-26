@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppContext';
 const ExpenseTotal = () => {
     const { expenses } = useContext(AppContext);
     const totalExpenses = expenses.reduce((total, item) => {
+        // console.log("ExpenseTotal ??????????????????????????", total += item.cost)
         return (total += item.cost);
     }, 0);
     return (
