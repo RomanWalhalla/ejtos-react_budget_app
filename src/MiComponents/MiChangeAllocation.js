@@ -5,7 +5,7 @@ import { ACTIONS } from "../Reducer/Boilerplate"
 
 const MiChangeAllocation = () => {
     const { setDepartment, setAllocation, department, 
-        allocation, dispatch, cost, setCost, newBudget } = useContext(Context)
+        allocation, dispatch, cost, setCost, newBudget, remaining, currency } = useContext(Context)
 
     const submitCostButton = (e) => {
         if (isFinite(e)) {
@@ -16,7 +16,7 @@ const MiChangeAllocation = () => {
     const submitValueButton = (e) => {
         // console.log("e", e)
         if ( isNaN(cost) ) {
-            console.log("NaNNaNNaNNaNNaNNaNNaN")
+            // console.log("NaNNaNNaNNaNNaNNaNNaN")
             return setCost(0)
         }
         if (department === undefined || allocation === undefined || cost === 0 ) {
@@ -24,14 +24,14 @@ const MiChangeAllocation = () => {
             return
         }
         if (allocation === "Add") {
-            console.log("Add")
+            // console.log("Add")
             dispatch({
                 type: ACTIONS.ADD_EXPENSE,
-                payload: { department, newBudget, cost }
+                payload: { department, newBudget, cost, remaining }
             })
         }
         if (allocation === "Reduce") {
-            console.log("Reduce")
+            // console.log("Reduce")
             dispatch({
                 type: ACTIONS.REDUCE_EXPENSE,
                 payload: { department, newBudget, cost }
@@ -41,7 +41,7 @@ const MiChangeAllocation = () => {
 
     return (
         <>
-            <div className="changeDepartment">
+            <div className="divChangeDepartment">
                 <label htmlFor="selectChangeDepartment">Department</label>
                 <select
                     name="selectChangeDepartment"
@@ -57,11 +57,11 @@ const MiChangeAllocation = () => {
                     <option value="HR">HR</option>
                 </select>
             </div>
-            <div className="changeAllocation">
+            <div className="divChangeAllocation">
                 <label htmlFor="selectChangeAllocation">Allocation</label>
                 <select
-                    name="selectChangeAllocation"
-                    id="selectChangeAllocation"
+                    // name="selectChangeAllocation"
+                    // id="selectChangeAllocation"
                     className="selectChangeAllocation"
                     onChange={(e) => setAllocation(e.target.value)}>
                     <option defaultValue>Choose Allocation...</option>
@@ -70,10 +70,12 @@ const MiChangeAllocation = () => {
                 </select>
             </div>
             <div className="divInputChangeAllocation">
+            <span>{currency.icon}</span>
                 <IMaskInput
                     className="inputChangeAllocation"
+                    type="number"
                     mask={Number}
-                    // defaultValue={}
+                    defaultValue={cost}
                     min={0}
                     max={20000}
                     maxLength={5}
@@ -81,7 +83,7 @@ const MiChangeAllocation = () => {
                     onAccept={submitCostButton}
                 >
                 </IMaskInput>
-                <span className='alertCostInput'>You can to write only numbers</span>
+                <span className='alertCostInput2'>You can to write only numbers</span>
             </div>
             <div className="divButtonSave">
                 <button className="buttonSave" onClick={submitValueButton}>Save</button>

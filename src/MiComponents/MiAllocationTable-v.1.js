@@ -33,24 +33,7 @@ const MiAllocationTable = () => {
     
     // console.log("MiAllocationTable-dispatch ??????????", dispatch)
 
-    console.log("MiAllocationTable-state ??????????", state)
-
-    console.log("MiAllocationTable-state.rowData ????", state.rowData)
-
-
-    // console.log("state.expenses[0].allocatedBudget", state.expenses[0].allocatedBudget)
-
-    // const nState = [state] 
-    // const nState = [dispatch] 
-
-        // useEffect(() => {
-            // updateState(state)
-            // updateDispatch(dispatch)
-        // },[state])
-
-    // updateState(nState)
-
-
+    // console.log("MiAllocationTable-state ??????????", state)
 
     const ColumnDataTable = [
         {
@@ -70,8 +53,6 @@ const MiAllocationTable = () => {
         },
         {
             field: "numb",
-            // valueFormatter: (p) => "£ " + state[0].allocatedBudget,
-
             valueFormatter: (p) => "£ " + p.value,
 
             editable: true,
@@ -80,7 +61,6 @@ const MiAllocationTable = () => {
         {
             field: "Increased by 10",
             cellRenderer: (p) => {
-                // console.log("cellRenderer", p)
                 return ButtonIncreaseBy10(p)
             },
             flex: 1,

@@ -16,7 +16,7 @@ export const AppReducer = (state, action) => {
 
     // console.log("action", action)
 
-    console.log("totalExpenses", totalExpenses)
+    // console.log("totalExpenses", totalExpenses)
 
     switch (action.type) {
         case ACTIONS.UPDATE_EXPENSE:
@@ -38,7 +38,7 @@ export const AppReducer = (state, action) => {
                 }
             }
             else {
-                alert("Cannot increase the allocation! Out of funds")
+                alert("Cannot increase the allocation! Do you have only " + action.payload.remaining + " £ in budget")
                 return {
                     ...state,
                     expenses: state.expenses.map(item => (item.id === action.payload.rowIndex)
@@ -51,27 +51,29 @@ export const AppReducer = (state, action) => {
                 return {
                     ...state,
                     expenses: state.expenses.map(item => {
-                        if ((item.department === action.payload.department)
-                            && ((item.allocatedBudget + action.payload.cost) > action.payload.newBudget)) {
-                            // console.log("if > 0     budget")
-                            return { ...item, allocatedBudget: item.allocatedBudget + ( action.payload.newBudget - totalExpenses) }
-                        }
+                        
                         if (((item.allocatedBudget + action.payload.cost) < 0)
                             && (item.department === action.payload.department)) {
                             // console.log("if < 0     0")
                             return { ...item, allocatedBudget: 0 }
                         }
-                        if (item.department === action.payload.department) {
+                        else if ((item.department === action.payload.department) && (action.payload.cost > action.payload.remaining)) {
                             // console.log("Else    +10")
-                            return { ...item, allocatedBudget: item.allocatedBudget + action.payload.cost }
+                            alert("Cannot increase the allocation! Do you have only " + action.payload.remaining + " £ in remaining");
+                            return { ...item, allocatedBudget: item.allocatedBudget }
+                        }
+                        else if ((item.department === action.payload.department)
+                            && (item.allocatedBudget + action.payload.cost) ) {
+                            console.log("if > 0     budget")
+                            return { ...item, allocatedBudget: item.allocatedBudget + action.payload.cost}
                         }
                         else { return item }
                     }
                     )
-                }
+                } 
             }
             else {
-                alert("Cannot increase the allocation! Out of funds");
+                alert("Cannot increase the allocation! Do you have only " + action.payload.remaining + " £ in budget");
                 return { ...state }
             }
 
@@ -112,6 +114,26 @@ export const AppReducer = (state, action) => {
                 },
                 ),
             }
+        case ACTIONS.REDUCE_EXPENSE_10:
+            return {
+                ...state,
+                expenses: state.expenses.map(item => {
+                    if (((item.allocatedBudget - 10) < 0)
+                        && (item.id === action.payload.rowIndex)) {
+                        // console.log("-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0")
+                        return { ...item, allocatedBudget: 0 }
+                    }
+                    else if (item.id === action.payload.rowIndex) {
+                        // console.log("++++++++++++++++++++++++++++++++++", item.allocatedBudget, action.payload.cost)
+                        return { ...item, allocatedBudget: item.allocatedBudget - 10 }
+                    }
+                    else { return item }
+                },
+                ),
+            }
+
+
+
         case ACTIONS.DELETE_EXPENSE:
             return {
                 ...state,

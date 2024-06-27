@@ -1,7 +1,15 @@
-import { useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
 import Context from "../context/MiContext";
+import ReactDOMServer from "react-dom/server"
+
 import { FcPlus, FcFullTrash } from 'react-icons/fc';
+import { BiSolidMinusCircle } from "react-icons/bi"
+
+import { PiCurrencyGbpBold } from "react-icons/pi"
+import { PiCurrencyDollarBold } from "react-icons/pi"
+import { PiCurrencyEurBold } from "react-icons/pi"
+import { PiCurrencyInrBold } from "react-icons/pi"
 
 import { ACTIONS } from "../Reducer/Boilerplate"
 
@@ -47,6 +55,9 @@ const MiAllocationTable = () => {
     const onIncrement = (rowIndex, allocatedBudget) => {
         dispatch({ type: ACTIONS.ADD_EXPENSE_10, payload: { rowIndex, allocatedBudget, newBudget } });
     };
+    const onDecrement = (rowIndex, allocatedBudget) => {
+        dispatch({ type: ACTIONS.REDUCE_EXPENSE_10, payload: { rowIndex, allocatedBudget, newBudget } });
+    };
 
     const onDelete = (rowIndex) => {
         dispatch({ type: ACTIONS.DELETE_EXPENSE, payload: { rowIndex } });
@@ -58,29 +69,37 @@ const MiAllocationTable = () => {
         const { newValue, oldValue } = params;
         if ((!isFinite(parseInt(newValue))) || parseInt(newValue) > maxValue || newValue.toString().length > maxDigits) {
             return params.node.setDataValue(params.colDef.field, oldValue);
-        }   
+        }
 
         else if (newValue !== oldValue) {
             dispatch({
                 type: ACTIONS.UPDATE_EXPENSE,
-                payload: { rowIndex: params.node.rowIndex, newValue, oldValue, newBudget }
+                payload: { rowIndex: params.node.rowIndex, newValue, oldValue, newBudget, remaining }
             });
         }
     };
 
+    const formatOptionLabel = (p) => (
+        console.log("formatOptionLabel", p)
+    )
+
     const ColumnDataTable = useMemo(() => [
-
         { headerName: "ID", field: "id", flex: 1, hide: true, },
-
         { headerName: "Department", field: "department", flex: 1, },
         {
-            headerName: "Allocated Budget", field: "allocatedBudget",
-            valueFormatter: (p) => (currency + " " + p.value), editable: true, flex: 1,
+            headerName: "Allocate Budget", field: "allocatedBudget",
+            editable: true,
+            flex: 1,
+            cellRenderer: ({value}) => <span>{currency.icon} {value}</span>,
             onCellValueChanged: onCellValueChanged,
         },
         {
-            headerName: "Increased by 10", field: "increased by 10",
+            headerName: "Increase by 10", field: "increased by 10",
             cellRenderer: renderCellButton(FcPlus, onIncrement), flex: 1,
+        },
+        {
+            headerName: "Decrease by 10", field: "decrease by by 10",
+            cellRenderer: renderCellButton(BiSolidMinusCircle, onDecrement), flex: 1,
         },
         {
             headerName: "Delete", field: "delete",
@@ -97,8 +116,9 @@ const MiAllocationTable = () => {
                     rowData={state.expenses}
                     columnDefs={ColumnDataTable} >
                     onCellValueChanged={onCellValueChanged}
+                    formatOptionLabel={formatOptionLabel}
                 </AgGridReact>
-                    <span>You can double-click on a value to change it</span>
+                <span style={{ color: "red" }}>You can double-click on a value to change it</span>
             </div>
         </>
     );

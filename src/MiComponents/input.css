@@ -1,8 +1,4 @@
-input {
-    display: block;
-    width: 150px;
-    /* padding: 5px; */
-}
+
 
 input:focus {
     border-color: rgb(255, 217, 3);
@@ -21,7 +17,3 @@ input:invalid {
 input:not(:focus):invalid {
     background-color: rgba(255, 0, 30, 0.637);
 }
-
-/* input.budget {
-    width: 150px;
-} */

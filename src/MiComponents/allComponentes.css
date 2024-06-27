@@ -1,6 +1,6 @@
 /* Names Sections */
 .nameApp {
-    grid-column: 1/4;
+    grid-column: 1/5;
     text-align: center;
 }
 
@@ -18,21 +18,27 @@
 
 .allComponentesHeader {
     display: grid;
-    grid-template-columns: 25% 37.5% 37.5%;
+    grid-template-columns: 30% 24% 24% 22%;
     background-color: rgba(116, 8, 205, 0.749);
 }
 
-.miBudget {
-    display: grid;
-    margin: 10px;
+.divInputMiBudget {
+    /* display: grid; */
+
+    display: block;    margin: 10px;
     background-color: rgb(185, 201, 201);
-    align-items: end;
+    align-items: center;
     justify-items: center;
-    padding: 15px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     border-radius: 10px;
 }
 
-.miRemaining {
+.spanMiBudget {
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+.divMiRemaining {
     display: grid;
     margin: 10px;
     padding: 15px 0px 15px 0px;
@@ -42,7 +48,12 @@
     border-radius: 10px;
 }
 
-.spentSoFar {
+.spanRemaining {
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+.divMiSpentSoFar {
     display: grid;
     margin: 10px;
     padding: 15px 0px 15px 0px;
@@ -51,10 +62,57 @@
     justify-items: center;
     border-radius: 10px;
 }
+
+.spanSpentSoFar {
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+.divCurrency {
+    align-items: center;
+    justify-items: center;
+    margin: 5px;
+}
+
+.selectCurrency {
+    background-color: rgb(57, 165, 86);
+    height: 100%;
+    width: 100%;
+    padding: 3px 3px 3px 3px;
+    margin: 15px 0px 0px 0px; 
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.selectCurrency:hover {
+    background-color: palegreen
+}
+
 /* ---------------------------------------------- */
 
 .miAllocationTable {
 
+}
+
+/* Button */
+
+.divButtonSave {
+    display: grid;
+    align-items: center;
+    justify-items: stretch;
+}
+
+.buttonSave {
+    margin-left: 10px;
+    width: 100px;
+    border-radius: 10px;
+    background-color: lightpink;
+    transform: translateY(12px);
+}
+
+.buttonSave:hover{
+    background-color: aquamarine;
 }
 
 /* Button Table */
@@ -68,14 +126,14 @@
 
 /* Section Change allocation */
 
-.miChangeAllocation {
+.sectionMiChangeAllocation {
     display: grid;
     grid-template-columns: 30% 30% 20% 20%;
     grid-column-gap: 10px;
     /* padding: 10px 0px 0px 20px; */
 }
 
-.changeDepartment, .changeAllocation {
+.divChangeDepartment, .divChangeAllocation {
     display: grid; 
     margin: 10px 0px;
     align-items: center;
@@ -97,55 +155,54 @@
 }
 
 .divInputChangeAllocation {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    border-radius: 5px;
+    display: block;
+    transform: translateY(28px);
+}
+
+/* Input */
+
+.inputMiBudget {
+    width: 90px;
+    margin-left: 10px;
+
+}
+
+.spanMiBudget {
+    margin-left: 5px;
 }
 
 .inputChangeAllocation {
-    transform: translateY(12px);
+    display: inline-block;
     border-radius: 6px;
+    width: 150px;
 }
 
-.divButtonSave {
-    display: grid;
-    align-items: center;
-    justify-items: stretch;
-}
-
-.buttonSave {
-    margin-left: 10px;
-    width: 100px;
-    border-radius: 10px;
-    background-color: lightpink;
-    transform: translateY(12px);
-}
-
-.buttonSave:hover{
-    background-color: aquamarine;
-}
-
-.alertCostInput, .alertCostInput1 {
-    width: 250px;
+.alertCostInput1, .alertCostInput2 {
+    width: 400px;
     text-align: center;
     background-color: rgb(247, 93, 93);
     position: absolute;
     visibility: hidden;
     opacity: 0;
-    transform: translateY(50px);
-    color: lightsteelblue;
-}
-
-input:invalid ~ .alertCostInput {
-    visibility: visible;
-    opacity: 1;
+    color: rgb(1, 42, 247);
 }
 
 input:invalid ~ .alertCostInput1 {
-    width: 150px;
-    transform: translateY(55px);
+    width: 250px;
+    transform: translateY(40px);
+    left: 10px;
     visibility: visible;
     opacity: 1;
 }
+
+input:invalid ~ .alertCostInput2 {
+    visibility: visible;
+    opacity: 1;
+    width: 250px;
+    transform: translateY(40px) translateX(-200px);
+    /* transform: translateX(-200px); */
+
+
+}
+
 /* ------------------------------------------------- */
